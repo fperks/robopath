@@ -1,0 +1,505 @@
+﻿<Fluent:RibbonWindow x:Class="RoboPath.PlannerApp.MainWindow"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"
+                     xmlns:Controls="clr-namespace:RoboPath.UI.Controls;assembly=RoboPath.UI"
+                     xmlns:Interaction="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                     xmlns:MVVMLight="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4"
+                     xmlns:Local="clr-namespace:RoboPath.PlannerApp"
+                     xmlns:ViewModel="clr-namespace:RoboPath.PlannerApp.ViewModel;assembly=RoboPath.PlannerApp"
+                     xmlns:Tools="clr-namespace:RoboPath.PlannerApp.Tools"
+                     xmlns:UIDrawing="clr-namespace:RoboPath.UI.Drawing;assembly=RoboPath.UI"
+                     xmlns:Drawing="clr-namespace:RoboPath.PlannerApp.Drawing"
+                     xmlns:Properties="clr-namespace:RoboPath.PlannerApp.Properties"
+                     xmlns:PathPlanning="clr-namespace:RoboPath.PlannerApp.PathPlanning"
+                     xmlns:Robot="clr-namespace:RoboPath.PlannerApp.PathPlanning.Robot"
+                     xmlns:Algorithms="clr-namespace:RoboPath.Core.PathPlanning;assembly=RoboPath.Core"
+                     xmlns:Graph="clr-namespace:RoboPath.Core.Graph;assembly=RoboPath.Core"
+                     xmlns:RobotPreview="clr-namespace:RoboPath.PlannerApp.Drawing.RobotPreview"
+                     xmlns:DrawingRobotPreview="clr-namespace:RoboPath.PlannerApp.Drawing.RobotPreview"
+                     xmlns:DrawingMap="clr-namespace:RoboPath.PlannerApp.Drawing.Map" mc:Ignorable="d"
+                     DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+                     MinWidth="1024" MinHeight="768" Height="960" Width="1280"
+                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+
+    <!--d:DataContext="{d:DesignInstance ViewModel:MainViewModel}"-->
+    <DockPanel>
+        <!-- Ribbon Control                      xmlns:Interaction="http://schemas.microsoft.com/expression/2010/interactivity"-->
+        <Fluent:Ribbon DockPanel.Dock="Top">
+
+
+            <!-- Contextual Tab Groups -->
+            <Fluent:Ribbon.ContextualGroups>
+                <Fluent:RibbonContextualTabGroup x:Name="TabGroupGraphAlgorithms" BorderBrush="SeaGreen"
+                                                 Background="Red" Header="Algorithms" Visibility="Visible" />
+                <Fluent:RibbonContextualTabGroup x:Name="TabGroupGraphSettings" BorderBrush="DarkMagenta"
+                                                 Background="Yellow" Header="Settings" Visibility="Visible" />
+            </Fluent:Ribbon.ContextualGroups>
+
+            <!-- BackStage -->
+            <Fluent:Ribbon.Menu>
+                <Fluent:Backstage>
+                    <Fluent:BackstageTabControl>
+                        <Fluent:Button Header="New" Icon="{StaticResource NewDocumentIcon}" LargeIcon="{StaticResource NewDocumentIcon}" SizeDefinition="Large, Middle, Middle"
+                                   Command="{Binding CommandNewDocument}" />
+                        <Fluent:Button Header="Open" Icon="{StaticResource OpenDocumentIcon}"
+                                   LargeIcon="{StaticResource OpenDocumentIcon}" SizeDefinition="Large, Middle, Middle"
+                                   Command="{Binding CommandOpenDocument}" />
+                        <Fluent:Button 
+                            Header="Save" Icon="{StaticResource SaveDocumentIcon}" LargeIcon="{StaticResource SaveDocumentIcon}" 
+                            SizeDefinition="Large, Middle, Middle" 
+                            Command="{Binding CommandSaveDocument}" />
+                        
+                        <Fluent:Button Header="Exit" />
+                    </Fluent:BackstageTabControl>
+                </Fluent:Backstage>
+            </Fluent:Ribbon.Menu>
+
+            <Fluent:RibbonTabItem Header="Home">
+                <Fluent:RibbonGroupBox Header="File" IsLauncherVisible="True">
+                    <Fluent:Button Header="New" SizeDefinition="Large, Middle, Middle"
+                                   Icon="{StaticResource NewDocumentIcon}" LargeIcon="{StaticResource NewDocumentIcon}"
+                                   Command="{Binding CommandNewDocument}" />
+
+                    <Fluent:Spinner Header="Width" SizeDefinition="Large, Middle, Middle"
+                                    Padding="1" Margin="1,5,1,1" Width="125" ClipToBounds="False" UseLayoutRounding="True"
+                                    Value="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceWidth, Mode=TwoWay}"
+                                    Minimum="10"
+                                    Maximum="10000" />
+
+                    <Fluent:Spinner Header="Height" SizeDefinition="Large, Middle, Middle" 
+                                    Padding="1" Margin="1,5,1,1" Width="125" ClipToBounds="False" UseLayoutRounding="True"
+                                    Value="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceHeight, Mode=TwoWay}"
+                                    Minimum="10"
+                                    Maximum="10000" />
+
+                    <Fluent:Button Header="Open" SizeDefinition="Large, Middle, Middle" 
+                                   Icon="{StaticResource OpenDocumentIcon}" LargeIcon="{StaticResource OpenDocumentIcon}" 
+                                   Command="{Binding CommandOpenDocument}" />
+
+                    <Fluent:Button Header="Save" SizeDefinition="Large, Middle, Middle" 
+                                   Icon="{StaticResource SaveDocumentIcon}" LargeIcon="{StaticResource SaveDocumentIcon}" 
+                                   Command="{Binding CommandSaveDocument}" />
+
+                    <Separator />
+
+                    <Fluent:Button Header="Export to PNG" SizeDefinition="Large, Middle, Middle"
+                                   Icon="{StaticResource ExportWorkspaceIcon}" LargeIcon="{StaticResource ExportWorkspaceIcon}" 
+                                   Command="{Binding CommandExportDocument}" />
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="General" IsLauncherVisible="True">
+                    <Fluent:Button Header="Zoom In" SizeDefinition="Middle, Middle, Middle"
+                                   Icon="{StaticResource ZoomInIcon}" LargeIcon="{StaticResource ZoomInIcon}" 
+                                   Command="{Binding CommandZoomIn}" />
+
+                    <Fluent:Button Header="Zoom Out" SizeDefinition="Middle, Middle, Middle"
+                                   Icon="{StaticResource ZoomOutIcon}" LargeIcon="{StaticResource ZoomOutIcon}" 
+                                   Command="{Binding CommandZoomOut}" />
+
+                    <Fluent:Button Header="Zoom To Extent" Icon="{StaticResource ZoomToExtentIcon}"
+                                   LargeIcon="{StaticResource ZoomToExtentIcon}" SizeDefinition="Middle, Middle, Middle"
+                                   Command="{Binding CommandExecuteTool}" CommandParameter="{x:Static Tools:ToolType.ZoomToExtent}" />
+
+                    <Fluent:ToggleButton Header="Zoom To Region" Icon="{StaticResource ZoomToRegionIcon}"
+                                   LargeIcon="{StaticResource ZoomToRegionIcon}" SizeDefinition="Large, Large, Large"
+                                   IsChecked="{Binding Path=CurrentToolType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static Tools:ToolType.ZoomToRegion}}" />
+
+                </Fluent:RibbonGroupBox>
+
+
+                <Fluent:RibbonGroupBox Header="Editing" IsLauncherVisible="True">
+
+                    <Fluent:ToggleButton Header="Select" IsEnabled="True" Icon="{StaticResource EditingSelectIcon}"
+                                         LargeIcon="{StaticResource EditingSelectIcon}"
+                                         GroupName="EditingTool"
+                                         IsChecked="{Binding Path=CurrentToolType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static Tools:ToolType.Selection}}" />
+
+                    <Fluent:ToggleButton Header="Add Obstacle Polygon" GroupName="EditingTool"
+                                         Icon="{StaticResource EditingAddObstacleIcon}" LargeIcon="{StaticResource EditingAddObstacleIcon}"
+                                         IsChecked="{Binding Path=CurrentToolType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static Tools:ToolType.EditDefineObstaclePolygon}}" />
+
+                    <Fluent:ToggleButton Header="Add Hole Polygon" GroupName="EditingTool"
+                                         Icon="{StaticResource EditingAddHoleIcon}" LargeIcon="{StaticResource EditingAddHoleIcon}"
+                                         IsChecked="{Binding Path=CurrentToolType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static Tools:ToolType.EditDefineFreeSpacePolygon}}" />
+
+                    <Fluent:Button Header="Fill" 
+                                   Icon="{StaticResource EditingFillIcon}" LargeIcon="{StaticResource EditingFillIcon}"
+                                   Command="{Binding Path=CommandFillWorkspace}" />
+
+                    <Fluent:ToggleButton Header="Start Position" GroupName="EditingTool"
+                                         Icon="{StaticResource GraphStartIcon}" LargeIcon="{StaticResource GraphStartIcon}"
+                                         IsChecked="{Binding Path=CurrentToolType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static Tools:ToolType.SetStartPosition}}" />
+
+                    <Fluent:ToggleButton Header="Goal Position" GroupName="EditingTool"
+                                         Icon="{StaticResource GraphGoalIcon}" LargeIcon="{StaticResource GraphGoalIcon}"
+                                         IsChecked="{Binding Path=CurrentToolType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static Tools:ToolType.SetGoalPosition}}" />
+                </Fluent:RibbonGroupBox>
+
+
+                <Fluent:RibbonGroupBox Header="Safety Buffer" IsLauncherVisible="True">
+                    <Fluent:Button Header="Apply" SizeDefinition="Large, Middle, Middle"
+                                   Icon="{StaticResource BufferApplyIcon}" LargeIcon="{StaticResource BufferApplyIcon}"
+                                   Command="{Binding Path=CommandComputeConfigurationSpace}" />
+                    <Fluent:Button Header="Remove" IsEnabled="True" SizeDefinition="Large, Middle, Middle"
+                                   Icon="{StaticResource BufferRemoveIcon}" LargeIcon="{StaticResource BufferRemoveIcon}"
+                                   Command="{Binding Path=CommandClearConfigurationSpace}" />
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Shortest Path">
+                    <Fluent:Button Header="Compute SP Dijkstra" 
+                                   Icon="{StaticResource GraphShortestPathIcon}" LargeIcon="{StaticResource GraphShortestPathIcon}"
+                                   SizeDefinition="Large, Middle, Middle" 
+                                   Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandComputeShortestPath}" CommandParameter="{x:Static Graph:ShortestPathAlgorithm.Dijkstra}" />
+                </Fluent:RibbonGroupBox>
+
+
+                <Fluent:RibbonGroupBox Header="Drawing" IsLauncherVisible="True">
+
+                    <Fluent:Button Header="Clear Results"
+                                   Icon="{StaticResource ClearIcon}" LargeIcon="{StaticResource ClearIcon}"
+                                   Command="{Binding CommandSetMapRenderState}" CommandParameter="{x:Static DrawingMap:MapRenderState.Initial}" />
+
+                    <!--<Fluent:ToggleButton Header="Show/Hide Vertices"
+                                         IsChecked="{Binding Path=IsGeometryVerticesVisible}" SizeDefinition="Large, Middle, Middle" />-->
+                    
+                    <!--<Fluent:ToggleButton Header="Show/Hide Polygon Decomposition"
+                                         SizeDefinition="Large, Middle, Middle" 
+                                         IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=IsObstacleDecompositionVisible, Mode=TwoWay}" />
+
+                    <Fluent:ToggleButton Header="Show/Hide Minowski Sums"
+                                         SizeDefinition="Large, Middle, Middle" 
+                                         IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=DrawingShowConfigurationAtVertices, Mode=TwoWay}" />-->
+
+                    <!--IsChecked="{Binding Path=CurrentDecompositionStrategy, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static PathPlanning:PolygonDecompositionStrategyType.EarClippingTriangulation}}"-->
+
+                </Fluent:RibbonGroupBox>
+
+            </Fluent:RibbonTabItem>
+
+            <Fluent:RibbonTabItem Header="Safety Buffer" IsSelected="True">
+
+                <Fluent:RibbonGroupBox Header="Robot Geometry" IsLauncherVisible="True">
+
+                    <Fluent:ToggleButton Header="Point" IsEnabled="True" GroupName="RobotBody"
+                        Icon="{StaticResource RobotTypePointIcon}" LargeIcon="{StaticResource RobotTypePointIcon}" 
+                        IsChecked="{Binding Path=CurrentRobotType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static Robot:RobotType.Point}}" />
+
+                    <Separator />
+
+                    <Fluent:ToggleButton 
+                        Header="Circle" IsEnabled="True" GroupName="RobotBody"
+                        Icon="{StaticResource RobotTypeCircleIcon}" LargeIcon="{StaticResource RobotTypeCircleIcon}" 
+                        IsChecked="{Binding Path=CurrentRobotType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static Robot:RobotType.Circle}}" />
+
+                    <Fluent:Spinner Header="Radius (px)" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                    Padding="1" Margin="1,5,1,1" Width="150" ClipToBounds="False" Size="Large" UseLayoutRounding="True"
+                                    Value="{Binding Source={x:Static Properties:Settings.Default}, Path=RobotBodyCircleRadius, Mode=TwoWay}"
+                                    Minimum="{Binding Source={x:Static Properties:Settings.Default}, Path=RobotBodyCircleMinRadius}"
+                                    Maximum="{Binding Source={x:Static Properties:Settings.Default}, Path=RobotBodyCircleMaxRadius}" />
+
+                    <Separator />                   
+                    
+                    <Fluent:ToggleButton 
+                        Header="Cyclic Polygon" IsEnabled="True" GroupName="RobotBody"
+                        Icon="{StaticResource RobotTypeCyclicPolygonIcon}" LargeIcon="{StaticResource RobotTypeCyclicPolygonIcon}"
+                        IsChecked="{Binding Path=CurrentRobotType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static Robot:RobotType.CyclicPolygon}}" />
+                    
+                    <Fluent:Spinner Header="Radius" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                    Padding="1" Margin="1,5,1,1" Width="150" ClipToBounds="False" Size="Large" UseLayoutRounding="True"
+                                    Minimum="{Binding Source={x:Static Properties:Settings.Default}, Path=RobotBodyCyclicPolygonMinRadius}"
+                                    Maximum="{Binding Source={x:Static Properties:Settings.Default}, Path=RobotBodyCyclicPolygonMaxRadius}"
+                                    Value="{Binding Source={x:Static Properties:Settings.Default}, Path=RobotBodyCyclicPolygonRadius, Mode=TwoWay}" />
+
+                    <Fluent:Spinner Header="# Of Edges" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                    Padding="1" Margin="1,5,1,1" Width="150" ClipToBounds="False" Size="Large" UseLayoutRounding="True"
+                                    Maximum="{Binding Source={x:Static Properties:Settings.Default}, Path=RobotBodyCyclicPolygonMaxEdgeCount}"
+                                    Minimum="{Binding Source={x:Static Properties:Settings.Default}, Path=RobotBodyCyclicPolygonMinEdgeCount}"
+                                    Value="{Binding Source={x:Static Properties:Settings.Default}, Path=RobotBodyCyclicPolygonEdgeCount, Mode=TwoWay}" />
+
+                    <Separator />
+
+                    <Fluent:ToggleButton 
+                        Header="Polygonal Robot" GroupName="RobotBody"
+                        Icon="{StaticResource RobotTypePolygonIcon}" LargeIcon="{StaticResource RobotTypePolygonIcon}"
+                        IsChecked="{Binding Path=CurrentRobotType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static Robot:RobotType.Polygon}}" 
+                        Command="{Binding CommandUsePolygonalRobotBody}" />
+
+                    <Fluent:ToggleButton 
+                        Header="Define Polygonal Body" GroupName="EditingTool"
+                        Icon="{StaticResource RobotDefinePolygonIcon}" LargeIcon="{StaticResource RobotDefinePolygonIcon}" 
+                        IsChecked="{Binding Path=CurrentToolType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static Tools:ToolType.RobotDefineBodyGeometry}}" />
+                    
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Safety Buffer" IsLauncherVisible="True">
+
+                    <Fluent:Button Header="Apply Safety Buffer" IsEnabled="True" SizeDefinition="Large, Middle, Middle"
+                                   Icon="{StaticResource BufferApplyIcon}" LargeIcon="{StaticResource BufferApplyIcon}"
+                                   Command="{Binding Path=CommandComputeConfigurationSpace}" />
+
+                    <Fluent:Button Header="Remove" IsEnabled="True" SizeDefinition="Large, Middle, Middle"
+                                   Icon="{StaticResource BufferRemoveIcon}" LargeIcon="{StaticResource BufferRemoveIcon}"
+                                   Command="{Binding Path=CommandClearConfigurationSpace}" />
+
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+            <Fluent:RibbonTabItem Header="Geometry-Based" Group="{Binding ElementName=TabGroupGraphAlgorithms}">
+                <Fluent:RibbonGroupBox Header="Visibility Graph" IsLauncherVisible="True">
+
+                    <Fluent:Button 
+                        Header="Build Visibility Graph" 
+                        Icon="{StaticResource AlgorithmVisibilityGraph}" LargeIcon="{StaticResource AlgorithmVisibilityGraph}"
+                        SizeDefinition="Large, Middle, Middle" 
+                        Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandExecuteAlgorithm}" CommandParameter="{x:Static Algorithms:PathPlannerAlgorithmType.VisibilityGraph}" />
+
+                    <Fluent:CheckBox Header="Include Boundary" 
+                                     SizeDefinition="Middle, Middle, Middle" 
+                                     IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=AlgorithmVisibilityGraphIncludeBoundary, Mode=TwoWay}" />
+
+                    <Fluent:CheckBox Header="Stop on Goal" 
+                                     SizeDefinition="Middle, Middle, Middle" 
+                                     IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=AlgorithmVisibilityGraphStopOnGoalVertexDiscovery, Mode=TwoWay}" />
+
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Triangulation" IsLauncherVisible="True">
+                    <Fluent:Button Header="Delauny Triangulation" 
+                                   Icon="{StaticResource AlgorithmDelaunayIcon}" LargeIcon="{StaticResource AlgorithmDelaunayIcon}"
+                                   SizeDefinition="Large, Middle, Middle" 
+                                   Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandExecuteAlgorithm}" 
+                                   CommandParameter="{x:Static Algorithms:PathPlannerAlgorithmType.Triangulation}" />
+                    
+                    <Fluent:CheckBox Header="Refine Path" 
+                                     SizeDefinition="Large, Middle, Middle" 
+                                     IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=AlgorithmApplyDelaunayPathRefinement, Mode=TwoWay}" />
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Generalized Voronoi" IsLauncherVisible="True">
+                    <Fluent:Button Header="Generalized Voronoi Diagram" 
+                                   Icon="{StaticResource AlgorithmVoronoiIcon}" LargeIcon="{StaticResource AlgorithmVoronoiIcon}"
+                                   SizeDefinition="Large, Large, Large" 
+                                   Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandExecuteAlgorithm}" 
+                                   CommandParameter="{x:Static Algorithms:PathPlannerAlgorithmType.GeneralizedVoronoiDiagram}"
+                                   />
+                    
+                    <Fluent:Spinner Header="Sampling Distance" SizeDefinition="Large, Large, Large"
+                                    InputWidth="50" Format="0.0 " 
+                                    Value="{Binding Source={x:Static Properties:Settings.Default}, Path=AlgorithmVoronoiSampleDistance, Mode=TwoWay}" Minimum="1.0"/>
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Decomposition" IsLauncherVisible="True">
+                    <Fluent:Button Header="Trapezoidal" 
+                                   Icon="{StaticResource AlgorithmGenericIcon}" LargeIcon="{StaticResource AlgorithmGenericIcon}"
+                                   SizeDefinition="Large, Middle, Middle" 
+                                   Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandExecuteAlgorithm}" CommandParameter="{x:Static Algorithms:PathPlannerAlgorithmType.TrapezoidalDecomposition}"
+                                   />
+
+                    <!--<Fluent:Button Header="BoustraphedonDecomposition" 
+                                   Icon="{StaticResource AlgorithmGenericIcon}" LargeIcon="{StaticResource AlgorithmGenericIcon}"
+                                   SizeDefinition="Large, Middle, Middle" 
+                                   Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandExecuteAlgorithm}" CommandParameter="{x:Static Algorithms:PathPlannerAlgorithmType.VisibilityGraph}"
+                                   />
+                    <Fluent:Button Header="Cannys Silhouette" 
+                                   Icon="{StaticResource AlgorithmGenericIcon}" LargeIcon="{StaticResource AlgorithmGenericIcon}"
+                                   SizeDefinition="Large, Middle, Middle" 
+                                   Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandExecuteAlgorithm}" CommandParameter="{x:Static Algorithms:PathPlannerAlgorithmType.VisibilityGraph}"
+                                   />-->
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+            <Fluent:RibbonTabItem Header="Sampling-Based" Group="{Binding ElementName=TabGroupGraphAlgorithms}">
+                <Fluent:RibbonGroupBox Header="Grid Sampling" IsLauncherVisible="True">
+                    <Fluent:Button Header="Grid Sampling" 
+                                   Icon="{StaticResource AlgorithmGridIcon}" LargeIcon="{StaticResource AlgorithmGridIcon}"
+                                   SizeDefinition="Large, Middle, Middle" 
+                                   Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandExecuteAlgorithm}" CommandParameter="{x:Static Algorithms:PathPlannerAlgorithmType.GridSampling}"
+                                   />
+
+                    <Fluent:Spinner Header="Vertex Spacing" SizeDefinition="Middle, Middle, Middle"
+                                    InputWidth="100" Format="0.0" 
+                                    Value="{Binding Source={x:Static Properties:Settings.Default}, Path=AlgorithmGridSamplingDistance, Mode=TwoWay}"/>
+
+                    <Fluent:Button Header="Compute Minimum Spacing" SizeDefinition="Middle, Middle, Middle"
+                                   Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandComputeGridSamplingMinimumDistance}"
+                                   />
+
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Probalistic" IsLauncherVisible="True">
+
+                    <Fluent:Spinner Header="(n) Verticies" SizeDefinition="Large, Large, Large"
+                                    InputWidth="125"
+                                    Minimum="10"
+                                    Value="{Binding Source={x:Static Properties:Settings.Default}, Path=AlgorithmPRMSampleCount, Mode=TwoWay}" />
+
+                    <Fluent:Spinner Header="(k) Neighbours" SizeDefinition="Large, Large, Large"
+                                    InputWidth="125"
+                                    Minimum="1"
+                                    Value="{Binding Source={x:Static Properties:Settings.Default}, Path=AlgorithmPRMNeighbourCount, Mode=TwoWay}" />
+
+                    <Fluent:Button Header="Probalistic Road Map" 
+                                   Icon="{StaticResource AlgorithmGenericIcon}" LargeIcon="{StaticResource AlgorithmGenericIcon}"
+                                   SizeDefinition="Large, Middle, Middle" 
+                                   Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandExecuteAlgorithm}" 
+                                   CommandParameter="{x:Static Algorithms:PathPlannerAlgorithmType.ProbalisticRoadMap}"
+                                   />
+
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Randomly Exploring Random Trees" IsLauncherVisible="True">
+
+                    <Fluent:Spinner Header="Verticies" SizeDefinition="Large, Large, Large"
+                                    InputWidth="200" Format="0" Minimum="10"
+                                    Value="{Binding Source={x:Static Properties:Settings.Default}, Path=AlgorithmRRTNeighbourCount, Mode=TwoWay}" />
+
+                    <Fluent:Spinner Header="Step Distance" SizeDefinition="Large, Large, Large"
+                                    InputWidth="200" Format="0.0" Minimum="1.0"
+                                    Value="{Binding Source={x:Static Properties:Settings.Default}, Path=AlgorithmRRTStepSize, Mode=TwoWay}" />
+
+                    <Fluent:Spinner Header="Goal Bias" SizeDefinition="Large, Large, Large"
+                                    InputWidth="200" Format="0.0" 
+                                    Value="{Binding Source={x:Static Properties:Settings.Default}, Path=AlgorithmRRTGoalBias, Mode=TwoWay}" 
+                                    Minimum="0.0" Maximum="1.0" Increment="0.02"/>
+
+                    <Fluent:CheckBox Header="Stop at Goal" 
+                                     SizeDefinition="Large, Middle, Middle" 
+                                     IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=AlgorithmRRTStopAtGoal, Mode=TwoWay}" />
+
+                    <Fluent:Button Header="General RRT" SizeDefinition="Large, Middle, Middle" 
+                                   Icon="{StaticResource AlgorithmGenericIcon}" LargeIcon="{StaticResource AlgorithmGenericIcon}"
+                                   Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandExecuteAlgorithm}" CommandParameter="{x:Static Algorithms:PathPlannerAlgorithmType.RRT}" />
+
+                    <Fluent:Button Header="Greedy RRT" SizeDefinition="Large, Middle, Middle" 
+                                   Icon="{StaticResource AlgorithmGenericIcon}" LargeIcon="{StaticResource AlgorithmGenericIcon}"
+                                   Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandExecuteAlgorithm}" CommandParameter="{x:Static Algorithms:PathPlannerAlgorithmType.GreedyRRT}" />
+
+                    <Fluent:Button Header="Dual RRT" SizeDefinition="Large, Middle, Middle" 
+                                   Icon="{StaticResource AlgorithmGenericIcon}" LargeIcon="{StaticResource AlgorithmGenericIcon}"
+                                   Command="{Binding Source={StaticResource Locator}, Path=PathPlannerViewModel.CommandExecuteAlgorithm}" CommandParameter="{x:Static Algorithms:PathPlannerAlgorithmType.DualRRT}" />
+
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            
+            
+
+
+        </Fluent:Ribbon>
+
+        <Fluent:StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+            <Fluent:StatusBarItem HorizontalAlignment="Left" Value="1510">
+                <TextBlock Height="Auto"  HorizontalAlignment="Left" Text="Mouse Position:"/>
+            </Fluent:StatusBarItem>
+            <Fluent:StatusBarItem Title="Mouse Position:" HorizontalAlignment="Left" Value="150" >
+                <TextBlock Height="Auto" HorizontalAlignment="Left" x:Name="MousePositionStatusBar" Text="{Binding Path=CurrentMousePosition, Converter={StaticResource CoordinateToStringConverter}}"/>
+            </Fluent:StatusBarItem>
+            <Separator HorizontalAlignment="Left" />
+        </Fluent:StatusBar>
+        
+        
+        <StackPanel DockPanel.Dock="Left" >
+            <Expander Header="Robot Preview" 
+                      UseLayoutRounding="True"
+                      IsExpanded="True"
+                      Padding="1">
+                <Expander.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+                </Expander.Background>
+                <!--
+                                    <Grid Width="{Binding Source={x:Static Properties:Settings.Default}, Path=RobotPreviewCanvasWidth}"
+                              Height="{Binding Source={x:Static Properties:Settings.Default}, Path=RobotPreviewCanvasHeight}" 
+            -->
+
+                <ScrollViewer 
+                    VerticalAlignment="Top" 
+                    VerticalScrollBarVisibility="Hidden" 
+                    HorizontalScrollBarVisibility="Hidden" 
+                    UseLayoutRounding="False">
+                    <Controls:ZoomAndPanControl 
+                            x:Name="RobotPreviewZoomControl" 
+                            Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}"
+                            ClipToBounds="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                        <Grid UseLayoutRounding="False" Height="200" Width="200">
+                            <Canvas x:Name="RobotPreviewCanvas" 
+                                        DataContext="{Binding Source={StaticResource Locator}, Path=RobotPreviewViewModel}" 
+                                        ClipToBounds="True"
+                                        Background="White" UseLayoutRounding="False">
+                                <UIDrawing:DrawingLayerHost x:Name="RobotPreviewLayerHost">
+                                </UIDrawing:DrawingLayerHost>
+                            </Canvas>
+                        </Grid>
+                    </Controls:ZoomAndPanControl>
+                </ScrollViewer>
+            </Expander>
+            <Expander Header="Layers"
+                      UseLayoutRounding="True"
+                      IsExpanded="True"
+                      Padding="1">
+                <Expander.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+                </Expander.Background>
+                <DataGrid ItemsSource="{Binding Source={StaticResource Locator}, Path=DrawingLayersViewModel.Layers}" 
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Layer Name" Width="SizeToCells" IsReadOnly="True"
+                                        Binding="{Binding Path=Name}">
+                            
+                        </DataGridTextColumn>
+                        <DataGridTemplateColumn Header="Visible" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Expander>
+        </StackPanel>
+        <!--<Grid DockPanel.Dock="Left" MaxWidth="225" UseLayoutRounding="False" VerticalAlignment="Top" Width="204">
+
+        </Grid>-->
+        
+        <ScrollViewer x:Name="MapScrollView" CanContentScroll="True" VerticalScrollBarVisibility="Visible"
+                      HorizontalScrollBarVisibility="Visible" DockPanel.Dock="Right">
+
+            <Controls:ZoomAndPanControl x:Name="MapZoomControl" Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}" ClipToBounds="True">
+
+                <Grid x:Name="MapPanel" Width="{Binding MapWidth}" Height="{Binding MapHeight}">
+
+                    <Canvas x:Name="MapContent" Background="White">
+                        <!--<Canvas.LayoutTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="-1" CenterX=".5" CenterY=".5" />
+                        </Canvas.LayoutTransform>-->
+                        <UIDrawing:DrawingLayerHost x:Name="MapLayerHost">
+                        </UIDrawing:DrawingLayerHost>
+                    </Canvas>
+                </Grid>
+
+                <Interaction:Interaction.Triggers>
+                    
+                    <Interaction:EventTrigger EventName="MouseDown">
+                        <MVVMLight:EventToCommand PassEventArgsToCommand="True" Command="{Binding CommandMouseDown}" />                        
+                    </Interaction:EventTrigger>
+
+                    <Interaction:EventTrigger EventName="MouseUp">
+                        <MVVMLight:EventToCommand PassEventArgsToCommand="True" Command="{Binding CommandMouseUp}" />
+                    </Interaction:EventTrigger>
+                    
+                    <Interaction:EventTrigger EventName="MouseMove">
+                        <MVVMLight:EventToCommand PassEventArgsToCommand="True" Command="{Binding CommandMouseMove}" />
+                    </Interaction:EventTrigger>
+                    
+                    <Interaction:EventTrigger EventName="MouseWheel">
+                        <MVVMLight:EventToCommand PassEventArgsToCommand="True" Command="{Binding CommandMouseWheelScroll}" />
+                    </Interaction:EventTrigger>
+
+                </Interaction:Interaction.Triggers>
+
+            </Controls:ZoomAndPanControl>
+        </ScrollViewer>
+
+    </DockPanel>
+</Fluent:RibbonWindow>

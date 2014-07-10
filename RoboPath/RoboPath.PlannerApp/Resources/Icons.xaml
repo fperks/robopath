@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <BitmapImage x:Key="AlgorithmGenericIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/AlgorithmGeneric.png" />
+    <BitmapImage x:Key="AlgorithmVisibilityGraph" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/AlgorithmVisibilityGraph.png" />
+    <BitmapImage x:Key="AlgorithmDelaunayIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/AlgorithmDelaunay.png" />
+    <BitmapImage x:Key="AlgorithmGridIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/AlgorithmGrid.png" />
+    <BitmapImage x:Key="AlgorithmVoronoiIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/AlgorithmVoronoi.png" />
+
+    <BitmapImage x:Key="BufferApplyIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/BufferApply.png" />
+    <BitmapImage x:Key="BufferRemoveIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/BufferRemove.png" />
+    
+    <BitmapImage x:Key="EditingSelectIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/EditingSelect.png" />
+    <BitmapImage x:Key="EditingAddHoleIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/EditingAddHole.png" />
+    <BitmapImage x:Key="EditingAddObstacleIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/EditingAddObstacle.png" />
+    <BitmapImage x:Key="EditingFillIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/EditingFill.png" />
+    
+    <BitmapImage x:Key="ExportWorkspaceIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/ExportWorkspace.png" />
+    <BitmapImage x:Key="OpenDocumentIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/Open.png" />
+    <BitmapImage x:Key="SaveDocumentIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/Save.png" />
+    <BitmapImage x:Key="NewDocumentIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/New.png" />
+
+    <BitmapImage x:Key="GenericBlueIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/GenericBlue.png" />
+    <BitmapImage x:Key="GenericGreenIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/GenericGreen.png" />
+    <BitmapImage x:Key="GenericRedIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/GenericRed.png" />
+    <BitmapImage x:Key="GenericYellowIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/GenericYellow.png" />
+
+    <BitmapImage x:Key="GraphStartIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/GraphStart.png" />
+    <BitmapImage x:Key="GraphGoalIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/GraphGoal.png" />
+    <BitmapImage x:Key="GraphShortestPathIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/GraphShortestPath.png" />
+
+    <BitmapImage x:Key="RobotTypePointIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/RobotPoint.png" />
+    <BitmapImage x:Key="RobotTypeCircleIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/RobotCircle.png" />
+    <BitmapImage x:Key="RobotTypeCyclicPolygonIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/RobotCyclicPolygon.png" />
+    <BitmapImage x:Key="RobotTypePolygonIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/RobotPolygon.png" />
+    <BitmapImage x:Key="RobotDefinePolygonIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/RobotDefinePolygon.png" />
+    
+    <BitmapImage x:Key="ZoomInIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/ZoomIn.png" />
+    <BitmapImage x:Key="ZoomOutIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/ZoomOut.png" />
+    <BitmapImage x:Key="ZoomToExtentIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/ZoomExtent.png" />
+    <BitmapImage x:Key="ZoomToRegionIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/ZoomToRegion.png" />
+    
+    <BitmapImage x:Key="ClearIcon" UriSource="/RoboPath.PlannerApp;component/Resources/Images/Icons/Clear.png" />
+    
+</ResourceDictionary>

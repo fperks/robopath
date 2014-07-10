@@ -1,0 +1,51 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Pen x:Key="GeometryOutlinePen" Thickness="0.5" Brush="Black" />
+    <Pen x:Key="BoundaryPen" Thickness="2.0" Brush="Crimson" />
+    <Pen x:Key="RobotConfigurationPen" Thickness="1.0" Brush="Black" />
+    <Pen x:Key="SelectionRegionPen" Thickness="1.0" Brush="SlateBlue" />
+    <Pen x:Key="DecomposedObstaclesPen" Thickness="1.0" Brush="Firebrick" />
+    <Pen x:Key="GraphEdgePen" Thickness="1.0" EndLineCap="Triangle" LineJoin="Round">
+        <Pen.Brush>
+            <SolidColorBrush Color="DarkSlateBlue"/>
+        </Pen.Brush>
+    </Pen>
+
+    <Pen x:Key="GraphShortestPathEdgePen" Thickness="2.5" EndLineCap="Triangle" DashCap="Round">
+        <Pen.DashStyle>
+            <DashStyle Dashes="10"/>
+        </Pen.DashStyle>
+        <Pen.Brush>
+            <SolidColorBrush Color="#FF13D100"/>
+        </Pen.Brush>
+    </Pen>
+
+    <Pen x:Key="PlannerTriangulationInvalidTrianglePen" Thickness="1.0" Brush="#FFFF1600">
+        <Pen.DashStyle>
+            <DashStyle Offset="5" Dashes="5,3"/>
+        </Pen.DashStyle>
+    </Pen>
+
+    <Pen x:Key="PlannerTriangulationValidTrianglePen" Thickness="1.0" Brush="#FF005DFF">
+        <Pen.DashStyle>
+            <DashStyle Offset="5" Dashes="5,3"/>
+        </Pen.DashStyle>
+    </Pen>
+
+    <Pen x:Key="AddObstacleHolePen" Thickness="2.0">
+        <Pen.Brush>
+            <SolidColorBrush Color="Black" Opacity="1.0"/>
+        </Pen.Brush>
+        <Pen.DashStyle>
+            <DashStyle Dashes="5 5"/>
+        </Pen.DashStyle>
+    </Pen>
+
+    <Pen x:Key="RobotPreviewGridPen" Thickness="1.0">
+        <Pen.Brush>
+            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveCaptionColorKey}}" Opacity="0.2"/>
+        </Pen.Brush>
+    </Pen>
+
+
+</ResourceDictionary>

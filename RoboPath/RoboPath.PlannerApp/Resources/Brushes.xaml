@@ -1,0 +1,38 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="RobotConfigurationBrush" Color="Transparent" />
+
+    <SolidColorBrush x:Key="CSpaceGeometryBrush" Color="Orange" />
+    <SolidColorBrush x:Key="CSpaceVertexBrush" Color="OrangeRed" />
+
+    <SolidColorBrush x:Key="WorkspaceGeometryBrush" Color="SkyBlue" />
+    <SolidColorBrush x:Key="WorkspaceVertexBrush" Color="DeepSkyBlue" />
+
+    <RadialGradientBrush x:Key="StartPositionBrush">
+        <GradientStop Color="Red" Offset="0"/>
+        <GradientStop Color="#FF00DCFF" Offset="1"/>
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GoalPositionBrush">
+        <GradientStop Color="#FFFF9700" Offset="1"/>
+        <GradientStop Color="#FF00DCFF"/>
+    </RadialGradientBrush>
+
+    <SolidColorBrush x:Key="ToolDefinePolygonGeometryBrush" Color="GreenYellow" Opacity="0.5"/>
+    
+    <SolidColorBrush x:Key="SelectionRegionBrush" Color="SkyBlue" />
+    <SolidColorBrush x:Key="DecomposedObstaclesBrush" Color="Transparent" />
+
+    <RadialGradientBrush x:Key="GraphVertexBrush">
+        <GradientStop Color="#FFB6D7FF" Offset="0"/>
+        <GradientStop Color="#FF003F7C" Offset="1"/>
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GraphShortestPathVertexBrush">
+        <GradientStop Color="#FF053C00" Offset="0"/>
+        <GradientStop Color="#FF13D100" Offset="1"/>
+    </RadialGradientBrush>
+
+    <SolidColorBrush x:Key="PlannerTriangulationValidTriangleBrush" Color="#FF005DFF" Opacity="0.5"/>
+    <SolidColorBrush x:Key="RobotPreviewBodyBrush" Color="#33005DFF" Opacity="0.5"/>
+</ResourceDictionary>

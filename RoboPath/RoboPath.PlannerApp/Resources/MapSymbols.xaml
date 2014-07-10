@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BitmapImage x:Key="GenericStarGreenSymbol16" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/GenericStarGreen16.png" />
+    <BitmapImage x:Key="GenericStarGreenSymbol32" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/GenericStarGreen32.png" />
+
+    <BitmapImage x:Key="GraphStartSymbol16" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/GraphStart16.png" />
+    <BitmapImage x:Key="GraphStartSymbol32" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/GraphStart32.png" />
+
+    <BitmapImage x:Key="GraphGoalSymbol16" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/GraphGoal16.png" />
+    <BitmapImage x:Key="GraphGoalSymbol32" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/GraphGoal32.png" />
+
+    <BitmapImage x:Key="BlueVertexSymbol16" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/BlueVertex16.png" />
+    <BitmapImage x:Key="BlueVertexSymbol32" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/BlueVertex32.png" />
+
+    <BitmapImage x:Key="OrangeVertexSymbol16" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/OrangeVertex16.png" />
+    <BitmapImage x:Key="OrangeVertexSymbol32" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/OrangeVertex32.png" />
+
+    <BitmapImage x:Key="BlackVertexSymbol16" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/Vertex16.png" />
+    <BitmapImage x:Key="BlackVertexSymbol32" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/Vertex32.png" />
+
+    <BitmapImage x:Key="VertexGraph32" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/VertexRed32.png" />
+    <BitmapImage x:Key="VertexShortestPath32" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/VertexGreen32.png" />
+    <BitmapImage x:Key="VertexPathPlanner32" UriSource="/RoboPath.PlannerApp;component/Resources/Images/MapSymbols/VertexPink32.png" />    
+</ResourceDictionary>

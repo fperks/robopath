@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FD000E2E-42DB-45C0-90C9-344AC8B1A326}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RoboPath.PlannerApp</RootNamespace>
+    <AssemblyName>RoboPath.PlannerApp</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Fluent, Version=2.1.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\external\Fluent\Debug\Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WPF4, Version=4.1.24.16313, Culture=neutral, PublicKeyToken=1673db7d5906b0ad, processorArchitecture=MSIL" />
+    <Reference Include="GalaSoft.MvvmLight.WPF4, Version=4.1.24.16313, Culture=neutral, PublicKeyToken=63eb5c012e0b3c1c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=59d6d24383174ac4, processorArchitecture=MSIL" />
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ClientServiceLocator.cs" />
+    <Compile Include="Converters\CoordinateToStringConverter.cs" />
+    <Compile Include="Converters\CoordinateToWPFPointConverter.cs" />
+    <Compile Include="Converters\EnumToBoolConverter.cs" />
+    <Compile Include="Converters\RobotConfigurationToWPFGeometryConverter.cs" />
+    <Compile Include="Drawing\DrawingContextExtensions.cs" />
+    <Compile Include="Drawing\IRenderer.cs" />
+    <Compile Include="Drawing\LayerTypeId.cs" />
+    <Compile Include="Drawing\Map\MapLayers.cs" />
+    <Compile Include="Drawing\Map\MapRenderer.cs" />
+    <Compile Include="Drawing\Map\MapRenderState.cs" />
+    <Compile Include="Drawing\PathPlanner\PathPlannerDrawingLayer.cs" />
+    <Compile Include="Drawing\PathPlanner\PathPlannerRenderer.cs" />
+    <Compile Include="Drawing\Renderer.cs" />
+    <Compile Include="Drawing\RobotPreview\RobotPreviewLayerId.cs" />
+    <Compile Include="Drawing\RobotPreview\RobotPreviewRenderer.cs" />
+    <Compile Include="IO\PathPlannerSetupXmlData.cs" />
+    <Compile Include="IO\PathPlannerSetupXmlSerializer.cs" />
+    <Compile Include="PathPlanning\PathPlannerManager.cs" />
+    <Compile Include="PathPlanning\PathPlannerSetup.cs" />
+    <Compile Include="PathPlanning\PathPlannerSetupService.cs" />
+    <Compile Include="PathPlanning\PathPlannerValidationException.cs" />
+    <Compile Include="PathPlanning\PolygonDecompositionStrategyType.cs" />
+    <Compile Include="PathPlanning\Robot\RobotManager.cs" />
+    <Compile Include="PathPlanning\Robot\RobotType.cs" />
+    <Compile Include="PathPlanning\Space\ConfigurationSpaceFactory.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Tools\Canvas\CanvasTool.cs" />
+    <Compile Include="Tools\Canvas\ICanvasTool.cs" />
+    <Compile Include="Tools\Canvas\ZoomToRegionTool.cs" />
+    <Compile Include="Tools\Canvas\ZoomToExtentTool.cs" />
+    <Compile Include="Tools\DrawableTool.cs" />
+    <Compile Include="Tools\Editing\DefineGeometryTool.cs" />
+    <Compile Include="Tools\Editing\DefinePolygonTool.cs" />
+    <Compile Include="Tools\Editing\IGeometryEditingTool.cs" />
+    <Compile Include="Tools\Editing\SetGoalPositionTool.cs" />
+    <Compile Include="Tools\Editing\SetStartPositionTool.cs" />
+    <Compile Include="Tools\Editing\TargetSpaceType.cs" />
+    <Compile Include="Tools\General\SelectionTool.cs" />
+    <Compile Include="Tools\Robot\DefineRobotGeometryTool.cs" />
+    <Compile Include="Tools\ToolType.cs" />
+    <Compile Include="Tools\ToolManager.cs" />
+    <Compile Include="Utility\PropertyChangedEventFilter.cs" />
+    <Compile Include="Utility\PropertyChangedNotifier.cs" />
+    <Compile Include="ViewModel\DrawingLayersViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.Commands.cs">
+      <DependentUpon>MainViewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PathPlannerViewModel.cs" />
+    <Compile Include="ViewModel\RobotPreviewViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\Views\DrawingLayerView.cs" />
+    <Page Include="Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Resources\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\MapSymbols.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Pens.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ResourceLibrary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Resource Include="Resources\Images\MapSymbols\VertexBlue32.png" />
+    <Resource Include="Resources\Images\MapSymbols\VertexGreen32.png" />
+    <Resource Include="Resources\Images\MapSymbols\VertexPink32.png" />
+    <Resource Include="Resources\Images\MapSymbols\VertexRed32.png" />
+    <Resource Include="Resources\Images\Icons\AlgorithmVisibilityGraph.png" />
+    <Resource Include="Resources\Images\Icons\Clear.png" />
+    <Resource Include="Resources\Images\Icons\Refresh.png" />
+    <Resource Include="Resources\Images\Icons\ZoomExtent.png" />
+    <Resource Include="Resources\Images\Icons\EditingSelect.png" />
+    <Resource Include="Resources\Images\MapSymbols\BlueVertex16.png" />
+    <Resource Include="Resources\Images\MapSymbols\BlueVertex32.png" />
+    <Resource Include="Resources\Images\MapSymbols\GenericStarGreen16.png" />
+    <Resource Include="Resources\Images\MapSymbols\GenericStarGreen32.png" />
+    <Resource Include="Resources\Images\MapSymbols\GraphGoal16.png" />
+    <Resource Include="Resources\Images\MapSymbols\GraphGoal32.png" />
+    <Resource Include="Resources\Images\MapSymbols\GraphStart16.png" />
+    <Resource Include="Resources\Images\MapSymbols\GraphStart32.png" />
+    <Resource Include="Resources\Images\MapSymbols\GreenPin16.png" />
+    <Resource Include="Resources\Images\MapSymbols\GreenPin32.png" />
+    <Resource Include="Resources\Images\MapSymbols\OrangeVertex16.png" />
+    <Resource Include="Resources\Images\MapSymbols\OrangeVertex32.png" />
+    <Resource Include="Resources\Images\MapSymbols\Vertex16.png" />
+    <Resource Include="Resources\Images\MapSymbols\Vertex32.png" />
+    <Resource Include="Resources\Images\Icons\AlgorithmDelaunay.png" />
+    <Resource Include="Resources\Images\Icons\AlgorithmGeneric.png" />
+    <Resource Include="Resources\Images\Icons\AlgorithmGrid.png" />
+    <Resource Include="Resources\Images\Icons\AlgorithmVoronoi.png" />
+    <Resource Include="Resources\Images\Icons\BufferApply.png" />
+    <Resource Include="Resources\Images\Icons\BufferRemove.png" />
+    <Resource Include="Resources\Images\Icons\EditingAddHole.png" />
+    <Resource Include="Resources\Images\Icons\EditingAddObstacle.png" />
+    <Resource Include="Resources\Images\Icons\EditingFill.png" />
+    <Resource Include="Resources\Images\Icons\ExportWorkspace.png" />
+    <Resource Include="Resources\Images\Icons\GenericBlue.png" />
+    <Resource Include="Resources\Images\Icons\GenericGreen.png" />
+    <Resource Include="Resources\Images\Icons\GenericRed.png" />
+    <Resource Include="Resources\Images\Icons\GenericYellow.png" />
+    <Resource Include="Resources\Images\Icons\GraphGoal.png" />
+    <Resource Include="Resources\Images\Icons\GraphShortestPath.png" />
+    <Resource Include="Resources\Images\Icons\GraphStart.png" />
+    <Resource Include="Resources\Images\Icons\New.png" />
+    <Resource Include="Resources\Images\Icons\Open.png" />
+    <Resource Include="Resources\Images\Icons\RobotCircle.png" />
+    <Resource Include="Resources\Images\Icons\RobotCyclicPolygon.png" />
+    <Resource Include="Resources\Images\Icons\RobotDefinePolygon.png" />
+    <Resource Include="Resources\Images\Icons\RobotPoint.png" />
+    <Resource Include="Resources\Images\Icons\RobotPolygon.png" />
+    <Resource Include="Resources\Images\Icons\Save.png" />
+    <Resource Include="Resources\Images\Icons\ZoomIn.png" />
+    <Resource Include="Resources\Images\Icons\ZoomOut.png" />
+    <Resource Include="Resources\Images\Icons\ZoomToRegion.png" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.config" />
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\external\NTS\GeoAPI\GeoAPI\GeoAPI.csproj">
+      <Project>{ffb69466-79de-466a-ada7-5c47c5c5ca3a}</Project>
+      <Name>GeoAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\external\NTS\NetTopologySuite.Windows.Media\NetTopologySuite.Windows.Media.csproj">
+      <Project>{ab09858e-bd48-498c-bb65-b90a5e5f9f26}</Project>
+      <Name>NetTopologySuite.Windows.Media</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\external\NTS\NetTopologySuite\NetTopologySuite.csproj">
+      <Project>{5770daa9-84e5-4770-af43-f6b815894368}</Project>
+      <Name>NetTopologySuite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoboPath.Core\RoboPath.Core.csproj">
+      <Project>{4fe41cbf-d29e-414c-853b-349e367f5401}</Project>
+      <Name>RoboPath.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoboPath.UI\RoboPath.UI.csproj">
+      <Project>{41248a92-7ac8-4cad-aa65-769e27c79f5c}</Project>
+      <Name>RoboPath.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Editing\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

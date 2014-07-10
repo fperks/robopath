@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4FE41CBF-D29E-414C-853B-349E367F5401}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RoboPath.Core</RootNamespace>
+    <AssemblyName>RoboPath.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Algorithms\Decomposition\EarClipPolygonDecomposition.cs" />
+    <Compile Include="Algorithms\IMinowskiSums.cs" />
+    <Compile Include="Algorithms\IPolygonDecomposition.cs" />
+    <Compile Include="Algorithms\IRobotSafetyBuffer.cs" />
+    <Compile Include="Algorithms\ISafetyBuffer.cs" />
+    <Compile Include="Algorithms\SelfMinimumDistance.cs" />
+    <Compile Include="Algorithms\MinowskiSums.cs" />
+    <Compile Include="Algorithms\RobotSafetyBuffer.cs" />
+    <Compile Include="Algorithms\SafetyBuffer\CircularSafetyBuffer.cs" />
+    <Compile Include="Algorithms\SafetyBuffer\PolygonalSafetyBuffer.cs" />
+    <Compile Include="Algorithms\Triangulation\ConformingDelaunayTriangulation.cs" />
+    <Compile Include="Algorithms\Triangulation\ConstraintType.cs" />
+    <Compile Include="Algorithms\Triangulation\EarClipping\EarClippingTriangulation.cs" />
+    <Compile Include="Algorithms\Triangulation\EarClipping\EarTriangle.cs" />
+    <Compile Include="Algorithms\Triangulation\EarClipping\IndexedDouble.cs" />
+    <Compile Include="Algorithms\Triangulation\EarClipping\IndexedEnvelope.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="DataStructures\KDTree2D.cs" />
+    <Compile Include="DataStructures\KDTreeNeighbours2D.cs" />
+    <Compile Include="DataStructures\KDTreeNode2D.cs" />
+    <Compile Include="DataStructures\RasterGrid2D.cs" />
+    <Compile Include="GeometricShape.cs" />
+    <Compile Include="GeometryOperationException.cs" />
+    <Compile Include="GeometrySettingsManager.cs" />
+    <Compile Include="Geometry\CoordinateOperations.cs" />
+    <Compile Include="Geometry\CoordinateExtensions.cs" />
+    <Compile Include="Geometry\GeometryBuilder.cs" />
+    <Compile Include="Geometry\GeometryExtensions.cs" />
+    <Compile Include="Geometry\GeometryOperations.cs" />
+    <Compile Include="Geometry\ComplexPolygonBuilder.cs" />
+    <Compile Include="Graph\Builders\IRoadMapBuilder.cs" />
+    <Compile Include="Graph\Builders\RoadMapBuilder.cs" />
+    <Compile Include="Graph\Builders\TreeGraphBuilder.cs" />
+    <Compile Include="Graph\Builders\VisibilityGraphBuilder.cs" />
+    <Compile Include="Graph\RoadMap.cs" />
+    <Compile Include="Graph\GraphExtensions.cs" />
+    <Compile Include="Graph\RoadMapOperationException.cs" />
+    <Compile Include="Graph\IRoadMap.cs" />
+    <Compile Include="Graph\ShortestPathAlgorithm.cs" />
+    <Compile Include="PathPlanning\BasePathPlanner.cs" />
+    <Compile Include="PathPlanning\Geometric\Decomposition\BoustraphedonDecompositionPlanner.cs" />
+    <Compile Include="PathPlanning\Geometric\Decomposition\TrapezoidalDecompositionPlanner.cs" />
+    <Compile Include="PathPlanning\Geometric\GeometricPathPlanner.cs" />
+    <Compile Include="PathPlanning\Geometric\GeneralizedVoronoiDiagramPlanner.cs" />
+    <Compile Include="PathPlanning\Geometric\TriangulationPathPlanner.cs" />
+    <Compile Include="PathPlanning\Geometric\VisibilityGraphPlanner.cs" />
+    <Compile Include="PathPlanning\IPathPlanner.cs" />
+    <Compile Include="PathPlanning\PathPlannerException.cs" />
+    <Compile Include="PathPlanning\PathPlannerAlgorithmState.cs" />
+    <Compile Include="PathPlanning\PathPlannerAlgorithmType.cs" />
+    <Compile Include="PathPlanning\Sampling\DualRRTPlanner.cs" />
+    <Compile Include="PathPlanning\Sampling\GreedyRRTPlanner.cs" />
+    <Compile Include="PathPlanning\Sampling\GridSamplingPlanner.cs" />
+    <Compile Include="PathPlanning\Sampling\PRMPlanner.cs" />
+    <Compile Include="PathPlanning\Sampling\RRTPlanner.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoboPathException.cs" />
+    <Compile Include="Robot\GeometricRobot.cs" />
+    <Compile Include="Robot\Geometric\CircularRobot.cs" />
+    <Compile Include="Robot\Geometric\PointRobot.cs" />
+    <Compile Include="Robot\Geometric\PolygonalRobot.cs" />
+    <Compile Include="Robot\IRobot.cs" />
+    <Compile Include="Robot\IRobotConfiguration.cs" />
+    <Compile Include="Robot\RobotBodyType.cs" />
+    <Compile Include="Robot\RobotConfiguration.cs" />
+    <Compile Include="Space\ConfigurationSpace.cs" />
+    <Compile Include="Space\IConfigurationSpace.cs" />
+    <Compile Include="Space\IWorkspace.cs" />
+    <Compile Include="Space\SpaceLocationType.cs" />
+    <Compile Include="Space\Workspace.cs" />
+    <Compile Include="Utility\CollectionExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\external\NTS\GeoAPI\GeoAPI\GeoAPI.csproj">
+      <Project>{ffb69466-79de-466a-ada7-5c47c5c5ca3a}</Project>
+      <Name>GeoAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\external\NTS\NetTopologySuite\NetTopologySuite.csproj">
+      <Project>{5770daa9-84e5-4770-af43-f6b815894368}</Project>
+      <Name>NetTopologySuite</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Algorithms\ShortestPath\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
